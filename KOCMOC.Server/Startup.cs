@@ -1,22 +1,9 @@
-using KOCMOC.Server.ORM.Context;
-using Microsoft.EntityFrameworkCore;
+using KOCMOC.Server.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<KocmocDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("KocmocDb")));
-
-builder.Services.AddCors(options =>
-{
-  options.AddDefaultPolicy(
-    builder =>
-    {
-      builder.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
+builder.Services.AddKocmocServices(builder.Configuration);
+builder.Services.AddKocmocCors();
 
 var app = builder.Build();
 
