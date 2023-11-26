@@ -1,24 +1,64 @@
+<div class="test" *ngIf="loading; else Content">
+ Loading...
+</div>
+
+<ng-template #Content>
+
+
+<div>
+  <h2 *ngIf="entityId; else newEntityHeader">Edit Producer: {{ entity?.name }}</h2>
+  <ng-template #newEntityHeader>
+    <h2>Add New Producer</h2>
+  </ng-template>
+</div>
+
 <form [formGroup]="producerForm" (ngSubmit)="saveEntity()">
 
-  <input formControlName="name" type="text" placeholder="Name">
+  <div>
+    <input formControlName="name" type="text" placeholder="Name">
+    <div *ngIf="producerForm.get('name')?.invalid && producerForm.get('name')?.touched">
+      <div *ngIf="producerForm.get('name')?.errors?.['required']">Name is required.</div>
+      <div *ngIf="producerForm.get('name')?.errors?.['maxlength']">Name cannot exceed 15 characters.</div>
+    </div>
+  </div>
 
-  <textarea formControlName="description" placeholder="Description"></textarea>
+  <div>
+    <textarea formControlName="description" placeholder="Description"></textarea>
+    <div *ngIf="producerForm.get('description')?.invalid && producerForm.get('description')?.touched">
+      <div *ngIf="producerForm.get('description')?.errors?.['maxlength']">Description cannot exceed 15 characters.</div>
+    </div>
+  </div>
 
-  <input formControlName="imageURL" type="text" placeholder="Image URL">
+  <div>
+    <input formControlName="imageURL" type="text" placeholder="Image URL">
+    <div *ngIf="producerForm.get('imageURL')?.invalid && producerForm.get('imageURL')?.touched">
+      <div *ngIf="producerForm.get('imageURL')?.errors?.['maxlength']">Image URL cannot exceed 15 characters.</div>
+    </div>
+  </div>
 
-  <select formControlName="producerRole">
-    <option *ngFor="let role of producerRoles" [ngValue]="role.value">{{ role.name }}</option>
-  </select>
-  
-  <select formControlName="producerStatus">
-    <option *ngFor="let status of producerStatus" [ngValue]="status.value">{{ status.name }}</option>
-  </select>
-  
+  <div>
+    <select formControlName="producerRole">
+      <option *ngFor="let role of producerRoles" [ngValue]="role.value">{{ role.name }}</option>
+    </select>
+    <div *ngIf="producerForm.get('producerRole')?.invalid && producerForm.get('producerRole')?.touched">
+      <div *ngIf="producerForm.get('producerRole')?.errors?.['required']">Producer role is required.</div>
+    </div>
+  </div>
+
+  <div>
+    <select formControlName="producerStatus">
+      <option *ngFor="let status of producerStatus" [ngValue]="status.value">{{ status.name }}</option>
+    </select>
+    <div *ngIf="producerForm.get('producerStatus')?.invalid && producerForm.get('producerStatus')?.touched">
+      <div *ngIf="producerForm.get('producerStatus')?.errors?.['required']">Producer status is required.</div>
+    </div>
+  </div>
 
   <button type="submit">Submit</button>
+  
 </form>
 
-
-
-
 <button (click)="deleteEntity()" *ngIf="entityId">Delete Producer</button>
+  <button (click)="back()">Back</button>
+
+</ng-template>
