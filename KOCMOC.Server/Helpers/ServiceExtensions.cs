@@ -18,6 +18,9 @@ namespace KOCMOC.Server.Helpers
 
       // Services
       services.AddScoped<ProducerService>();
+
+      // Logs
+      services.AddLogging();
     }
 
     public static void AddKocmocCors(this IServiceCollection services)

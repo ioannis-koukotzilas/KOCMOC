@@ -12,11 +12,29 @@ namespace KOCMOC.Server.API.ProducerAPI
       _producerRepo = producerRepo;
     }
 
-    public Task<IList<Producer>> GetAllProducersAsync()
+    public Task<IList<Producer>> GetAllAsync()
     {
       return _producerRepo.GetAllAsync();
     }
 
-    // Other methods for CRUD operations can be added here...
+    public Task<Producer?> GetByIdAsync(int id)
+    {
+      return _producerRepo.GetByIdAsync(id);
+    }
+
+    public Task AddAsync(Producer producer)
+    {
+      return _producerRepo.AddAsync(producer);
+    }
+
+    public Task UpdateAsync(int id, Producer producer)
+    {
+      return _producerRepo.UpdateAsync(id, producer);
+    }
+
+    public Task DeleteAsync(int id)
+    {
+      return _producerRepo.DeleteAsync(id);
+    }
   }
 }

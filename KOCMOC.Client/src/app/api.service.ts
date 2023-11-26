@@ -7,9 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
+  private apiUrl = 'http://localhost:5203/api/producer'; // Adjust the URL based on your API
+
   constructor(private http: HttpClient) { }
 
-  getHelloWorld(): Observable<string> {
-    return this.http.get<string>('http://localhost:5040/', { responseType: 'text' as 'json' });
+  getProducers(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
+  addProducer(producer: any) {
+    return this.http.post(this.apiUrl, producer);
   }
 }

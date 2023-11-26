@@ -1,0 +1,24 @@
+<form [formGroup]="producerForm" (ngSubmit)="saveEntity()">
+
+  <input formControlName="name" type="text" placeholder="Name">
+
+  <textarea formControlName="description" placeholder="Description"></textarea>
+
+  <input formControlName="imageURL" type="text" placeholder="Image URL">
+
+  <select formControlName="producerRole">
+    <option *ngFor="let role of producerRoles" [ngValue]="role.value">{{ role.name }}</option>
+  </select>
+  
+  <select formControlName="producerStatus">
+    <option *ngFor="let status of producerStatus" [ngValue]="status.value">{{ status.name }}</option>
+  </select>
+  
+
+  <button type="submit">Submit</button>
+</form>
+
+
+
+
+<button (click)="deleteEntity()" *ngIf="entityId">Delete Producer</button>

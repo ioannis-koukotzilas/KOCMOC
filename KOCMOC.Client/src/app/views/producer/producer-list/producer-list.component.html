@@ -1,0 +1,9 @@
+<h2>Producers</h2>
+<button (click)="createNew()">Create New</button>
+<ul>
+  <li *ngFor="let producer of producers">
+    {{ producer.name }} - <a [routerLink]="['/producer/edit', producer.id]">Edit</a>
+  </li>
+</ul>
+
+

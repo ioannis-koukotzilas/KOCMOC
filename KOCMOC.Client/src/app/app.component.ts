@@ -9,15 +9,13 @@ import { ApiService } from './api.service';
 export class AppComponent {
   title = 'KOCMOC.Client';
 
-  message = '';
+  producers: any[] = [];
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getHelloWorld().subscribe(data => {
-      this.message = data;
-    }, error => {
-      console.error('Error fetching data: ', error);
+    this.apiService.getProducers().subscribe(data => {
+      this.producers = data;
     });
   }
 }
